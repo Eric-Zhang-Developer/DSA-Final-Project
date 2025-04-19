@@ -4,9 +4,6 @@ import tracemalloc
 import argparse
 from graph_loader import load_path  #graph loader
 
-def heuristic(u, v):
-    #A* is same as Dijkstra on unweighted graph
-    return 0
 
 def new_path(parent, current):
     path = [current]
