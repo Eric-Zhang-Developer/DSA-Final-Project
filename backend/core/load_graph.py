@@ -23,6 +23,6 @@ def load_path(path):
                 graph[src] = []
             graph[src].append(dst) # our directed edge
     return graph #after reading the whole file, it makes the final adjeceny list
-    
-    #now me and thomas can load edges files like
-        #graph = load_path("backend/data/12831.edges")
+
+#now me and thomas can load edges files like
+    #graph = load_path("backend/data/12831.edges")
