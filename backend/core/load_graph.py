@@ -1,3 +1,4 @@
+#notes and function written by Sayhan
 # EGO Network is how people are connected to eachother on twitter, 
 # for example, the first edges  file we have is 12831, contains a bunch of users connected to user 12831, but not 12831 themselves
     # each line has two users next to eachother like usera userb 
