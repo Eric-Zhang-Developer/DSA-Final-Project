@@ -1,7 +1,7 @@
 import heapq #heap priorty queue
-import time
-import tracemalloc
-import argparse
+import time #for timing
+import tracemalloc #tracks memory
+import argparse # command line args
 from graph_loader import load_path  #graph loader
 
 
