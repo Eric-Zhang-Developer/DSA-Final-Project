@@ -6,12 +6,12 @@ export default function Home() {
       {/* User Input Boxes to Enter User ID's */}
       <div className="flex flex-row gap-8">
         <div className="flex flex-col items items-center">
-          <p className="pb-2">User 1</p>
-          <input className="bg-white text-black"></input>
+          <p className="pb-2 text-lg">User 1</p>
+          <input className="bg-white text-black text-lg"></input>
         </div>
         <div className="flex flex-col items items-center">
-          <p className="pb-2"> User 2</p>
-          <input className="bg-white text-black"></input>
+          <p className="pb-2 text-lg"> User 2</p>
+          <input className="bg-white text-black text-lg"></input>
         </div>
       </div>
 
