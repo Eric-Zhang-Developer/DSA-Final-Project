@@ -26,8 +26,12 @@ export default function Home() {
       </button>
 
       {/* Results */}
-      <section>
-        <div className="flex flex-row gap-16 bg-slate-800 p-6 rounded-2xl">
+      <section className="flex flex-col bg-slate-800 p-6 rounded-2xl items-center gap-6">
+        <h3 className="text-xl">User 1 is __ steps away from User 2</h3>
+        
+        {/* Dijkstra's vs A* Comparison */}
+        {/* Path length for the algos is kept for troubleshooting for now*/}
+        <div className="flex flex-row gap-16 ">
           <div className=" flex flex-col gap-2">
             <h3 className="text-xl">Dijkstra&apos;s Results:</h3>
             <p>Time:</p>
