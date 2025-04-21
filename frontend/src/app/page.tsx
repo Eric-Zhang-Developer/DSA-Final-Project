@@ -28,7 +28,7 @@ export default function Home() {
             type="text"
             onChange={handleSetUser1}
             value={user1}
-            className="bg-white text-black text-lg"
+            className="bg-white text-black text-lg p-0.5 rounded-lg pl-2"
             placeholder="Enter Start User Id"
           ></input>
         </div>
@@ -38,7 +38,7 @@ export default function Home() {
             type="text"
             onChange={handleSetUser2}
             value={user2}
-            className="bg-white text-black text-lg"
+            className="bg-white text-black text-lg p-0.5 rounded-lg pl-2"
             placeholder="Enter End User Id"
           ></input>
         </div>
