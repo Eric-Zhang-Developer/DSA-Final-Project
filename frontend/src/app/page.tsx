@@ -11,12 +11,11 @@ export default function Home() {
   const handleSetUser1 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser1(event.target.value);
   };
-
   const handleSetUser2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser2(event.target.value);
   };
 
-  
+
   return (
     <main className="flex flex-col mx-auto items-center p-4 gap-8">
       <h1 className="text-3xl">Placeholder Title</h1>
@@ -30,6 +29,7 @@ export default function Home() {
             onChange={handleSetUser1}
             value={user1}
             className="bg-white text-black text-lg"
+            placeholder="Enter Start User Id"
           ></input>
         </div>
         <div className="flex flex-col items items-center">
@@ -39,6 +39,7 @@ export default function Home() {
             onChange={handleSetUser2}
             value={user2}
             className="bg-white text-black text-lg"
+            placeholder="Enter End User Id"
           ></input>
         </div>
       </div>
