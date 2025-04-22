@@ -18,4 +18,7 @@ os.makedirs("../data/results", exist_ok=True)
 # Run
 result = run_dijkstra(graph, start, end)
 # Save the result one level up
-with open
+with open(f"../data/results/dijkstra_combined_{start}_{end}.json", "w") as f:
+    json.dump(result, f, indent=2)
+#print
+print("Dijkstra output saved")
