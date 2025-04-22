@@ -1,0 +1,20 @@
+{
+  "algorithm": "dijkstra",
+  "graph": "twitter_combined.txt",
+  "start": "18687",
+  "end": "40263",
+  "path": [],
+  "cost": -1,
+  "visited": [
+    "18687"
+  ],
+  "steps": [
+    {
+      "current": "18687",
+      "queue": [],
+      "visited": [
+        "18687"
+      ]
+    }
+  ]
+}

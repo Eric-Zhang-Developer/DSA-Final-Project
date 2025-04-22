@@ -3,7 +3,11 @@ import heapq #heap priorty queue
 import time #for timing
 import tracemalloc #tracks memory
 import argparse # command line args
-from graph_loader import load_path  #graph loader
+from core.load_graph import load_path #graph loader #changed for output file-S
+
+# placeholder heuristic -s
+def heuristic(node, goal):
+    return 0
 
 
 def new_path(parent, current):
