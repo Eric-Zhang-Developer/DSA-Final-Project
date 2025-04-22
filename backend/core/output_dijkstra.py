@@ -1,20 +1,21 @@
 # made by sayhan
 #TOOLS
+import sys
+import os
+import json
+
+#import from parent folder
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from core.load_graph import load_path
 from core.Dijkstra import run_dijkstra
-import json
-import os  # create folders if missing, used for local run
-
-#had to do this for local run
-os.makedirs("data/results", exist_ok=True)
-# Load graph
-graph = load_path("data/twitter_combined.txt")
-# Test case
+# Fix: go up one level from core to data/
+graph = load_path("../data/twitter_combined.txt")
+# test case
 start = "18687"
 end = "40263"
-# Run algorithm
+# Make sure results folder exists
+os.makedirs("../data/results", exist_ok=True)
+# Run
 result = run_dijkstra(graph, start, end)
-# Save result
-with open(f"data/results/dijkstra_combined_{start}_{end}.json", "w") as f:
-    json.dump(result, f, indent=2)
-print("Dijkstra output saved.")
+# Save the result one level up
+with open
