@@ -62,7 +62,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col mx-auto items-center p-4 gap-8">
-      <h1 className="text-3xl">Placeholder Title</h1>
+      <h1 className="text-3xl">TwitterTraverse</h1>
 
       {/* User Input Boxes to Enter User ID's */}
       <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 w-full max-w-md">
