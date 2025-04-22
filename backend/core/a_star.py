@@ -5,10 +5,12 @@ import tracemalloc #tracks memory
 import argparse # command line args
 from core.load_graph import load_path #graph loader #changed for output file-S
 
-# placeholder heuristic -s
+# heuristic function
 def heuristic(node, goal):
-    return 0
-
+    try:
+        return abs(int(node) - int(goal)) 
+    except:
+        return 0  
 
 def new_path(parent, current):
     path = [current]
