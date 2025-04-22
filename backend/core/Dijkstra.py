@@ -1,6 +1,7 @@
 #written by Sayhan
 #TOOLS
 import heapq  #for shortest distance
+import time  # for tracking runtime like thomas did
 
 #MAIN FUNCTUION
 #Dijkstra's on adirected graph
@@ -11,6 +12,7 @@ def run_dijkstra(graph, start, end):
     seen = set()  #stores nodes we saw already
     steps = [] #list for possible frontend animation
    #this keeps going until were done with every node
+    start_time = time.perf_counter()  # start timing
     while queue: 
         cost, on_this_node = heapq.heappop(queue) #current lowest cost
         if on_this_node in seen: # skip node if seen
@@ -46,13 +48,17 @@ def run_dijkstra(graph, start, end):
         #if u cant go to start its not a path
         path = []
     #FRONt end results.
+    end_time = time.perf_counter() #for time 
+    runtime = round(end_time - start_time, 6)
     return {
-        "algorithm": "dijkstra",
-        "graph": "twitter_combined.txt", #graph file
-        "start": start, #the start
-        "end": end, #where we wanna go
-        "path": path, #the path from start to end
-        "cost": distance.get(end, -1), #the cost
-        "visited": list(seen),
-        "steps": steps #animation
-    }
+    "algorithm": "dijkstra",
+    "graph": "twitter_combined.txt",
+    "start": start,
+    "end": end,
+    "path": path,
+    "cost": distance.get(end, -1),
+    "visited": list(seen),
+    "steps": steps,
+    "nodes_expanded": len(seen), #time
+    "runtime_seconds": runtime #time
+}
