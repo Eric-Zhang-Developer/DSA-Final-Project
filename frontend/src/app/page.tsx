@@ -63,12 +63,12 @@ export default function Home() {
   return (
     <main className="flex flex-col mx-auto items-center p-4 gap-8">
       <h1 className="text-3xl">Placeholder Title</h1>
-      
+
       {/* User Input Boxes to Enter User ID's */}
       <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 w-full max-w-md">
         <div className="flex flex-col items-center flex-1">
           <label
-            htmlFor="user1-input" 
+            htmlFor="user1-input"
             className="pb-1.5 text-base font-medium text-emerald-300 uppercase tracking-wider" // Sci-fi label style
           >
             User 1
@@ -78,7 +78,7 @@ export default function Home() {
             onChange={handleSetUser1}
             value={user1}
             className="bg-slate-800 border border-slate-600 text-gray-100 text-lg p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 placeholder-slate-500 transition duration-200 shadow-inner"
-            placeholder="User ID" 
+            placeholder="User ID"
           ></input>
         </div>
         <div className="flex flex-col items-center flex-1">
@@ -92,20 +92,25 @@ export default function Home() {
             onChange={handleSetUser2}
             value={user2}
             className="bg-slate-800 border border-slate-600 text-gray-100 text-lg p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 placeholder-slate-500 transition duration-200 shadow-inner"
-            placeholder="User ID" 
+            placeholder="User ID"
           ></input>
         </div>
       </div>
-      
+
       {/* Compare */}
       <button
         onClick={handleCompare}
-        className="transform bg-slate-800 text-white text-xl
-          py-3 px-4 mr-4 rounded-lg shadow-md 
-          transition hover:shadow-xl hover:bg-emerald-500 hover:scale-105 cursor-pointer
-          "
+        disabled={isLoading || !user1 || !user2} // Keep disabled logic for styling state
+        className="
+    transform bg-emerald-600 text-white text-lg font-semibold tracking-wide
+    py-2.5 px-8 rounded shadow-md border border-emerald-700
+    transition duration-200
+    hover:bg-emerald-500 hover:shadow-lg hover:border-emerald-500 hover:scale-105
+    hover:cursor-pointer
+    disabled:opacity-40"
       >
-        {isLoading ? "Comparing..." : "Compare"}
+        {/* Keep the dynamic text based on isLoading state */}
+        {isLoading ? "ANALYZING..." : "ANALYZE CONNECTION"}
       </button>
 
       {/* --- Display Area --- */}
