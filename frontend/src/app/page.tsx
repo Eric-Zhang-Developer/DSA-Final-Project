@@ -33,8 +33,8 @@ export default function Home() {
 
     try {
       // call backend
-      // localhost for now 
-      const response = await fetch("http://localhost:5000/api/compare", {
+      // localhost for now
+      const response = await fetch("http://127.0.0.1:5000/api/compare", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ start: user1, end: user2 }),
@@ -63,7 +63,6 @@ export default function Home() {
   return (
     <main className="flex flex-col mx-auto items-center p-4 gap-8">
       <h1 className="text-3xl">Placeholder Title</h1>
-
       {/* User Input Boxes to Enter User ID's */}
       <div className="flex flex-row gap-8">
         <div className="flex flex-col items items-center">
@@ -87,7 +86,6 @@ export default function Home() {
           ></input>
         </div>
       </div>
-
       {/* Compare */}
       <button
         onClick={handleCompare}
@@ -99,29 +97,69 @@ export default function Home() {
         {isLoading ? "Comparing..." : "Compare"}
       </button>
 
-      {/* Results */}
-      <section className="flex flex-col bg-slate-800 p-6 rounded-2xl items-center gap-6">
-        <h3 className="text-xl">
-          {user1} is __ steps away from {user2}
-        </h3>
+      {/* --- Display Area --- */}
+      <div className="w-full min-h-[250px]">
+        {/* Error Handling */}
+        {!isLoading && error && (
+          <p className="text-center text-red-500 text-lg pt-4">
+            Error: {error}
+          </p>
+        )}
 
-        {/* Dijkstra's vs A* Comparison */}
-        {/* Path length for the algos is kept for troubleshooting for now*/}
-        <div className="flex flex-row gap-16 ">
-          <div className=" flex flex-col gap-2">
-            <h3 className="text-xl">Dijkstra&apos;s Results:</h3>
-            <p>Time:</p>
-            <p>Nodes Explored: </p>
-            <p>Path Length: </p>
-          </div>
-          <div className=" flex flex-col gap-2">
-            <h3 className="text-xl">A* Results:</h3>
-            <p>Time:</p>
-            <p>Nodes Explored:</p>
-            <p>Path Length:</p>
-          </div>
-        </div>
-      </section>
+        {/* Main Results */}
+        {/* Appears ONLY when isLoading is false AND error is null AND results has data */}
+        {!isLoading && !error && results && (
+          <section className="flex flex-col bg-slate-800 p-6 rounded-2xl items-center gap-6 w-full mt-4">
+            {/* Overall Summary */}
+            <h3 className="text-xl text-center">
+              {results.dijkstra.cost !== null && results.dijkstra.cost >= 0
+                ? `${results.dijkstra.start} is ${results.dijkstra.cost} steps away from ${results.dijkstra.end}` // Use IDs from results for consistency
+                : `No path found between ${user1} and ${user2}`}{" "}
+            </h3>
+
+            {/* Display the Path */}
+            <div className="w-full text-center">
+              <h4 className="text-lg mb-1">Path Found:</h4>
+              <p className="text-sm bg-slate-700 p-2">
+                {results.dijkstra.path && results.dijkstra.path.length > 0
+                  ? results.dijkstra.path.join(" -> ")
+                  : "N/A"}
+              </p>
+            </div>
+
+
+            {/* Dijkstra's vs A* Comparison */}
+            <div className="flex flex-col md:flex-row gap-8 md:gap-16 w-full justify-center">
+              {/* Dijkstra Column */}
+              <div className="flex flex-col gap-2 text-center md:text-left">
+                <h3 className="text-xl">Dijkstra&apos;s Results:</h3>
+                <p>
+                  Time: {results.dijkstra?.runtime_seconds?.toFixed(4) ?? "N/A"}{" "}
+                  s
+                </p>
+                <p>
+                  Nodes Explored:{" "}
+                  {results.dijkstra?.nodes_expanded?.toLocaleString() ?? "N/A"}
+                </p>
+                <p>Path Length: {results.dijkstra?.cost ?? "N/A"}</p>
+              </div>
+
+              {/* A* Column */}
+              <div className="flex flex-col gap-2 text-center md:text-left">
+                <h3 className="text-xl">A* Results:</h3>
+                <p>
+                  Time: {results.a_star?.runtime_seconds?.toFixed(4) ?? "N/A"} s
+                </p>
+                <p>
+                  Nodes Explored:{" "}
+                  {results.a_star?.nodes_expanded?.toLocaleString() ?? "N/A"}
+                </p>
+                <p>Path Length: {results.a_star?.cost ?? "N/A"}</p>
+              </div>
+            </div>
+          </section>
+        )}
+      </div>
     </main>
   );
 }
