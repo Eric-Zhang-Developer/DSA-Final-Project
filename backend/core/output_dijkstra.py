@@ -11,8 +11,8 @@ from core.Dijkstra import run_dijkstra
 # Fix: go up one level from core to data/
 graph = load_path("../data/twitter_combined.txt")
 # test case
-start = "18687"
-end = "40263"
+start = "214328887"
+end = "151338729"
 # Make sure results folder exists
 os.makedirs("../data/results", exist_ok=True)
 # Run
