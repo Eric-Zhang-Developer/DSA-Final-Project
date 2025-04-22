@@ -4,8 +4,6 @@ from flask_cors import CORS
 from core.load_graph import load_path
 from core.Dijkstra import run_dijkstra
 from core.a_star import a_star
-import sys
-import os
 
 # Setup
 app = Flask(__name__)
