@@ -20,11 +20,35 @@ except Exception as e:
     print(f"Error loading graph: {e}")
     graph = None
 
-# API Route 
-@app.route('/')
-def hello():
-    return "Twitter Traverse API is running!"
+@app.route('/api/compare', methods=['POST'])
+def compare():
+    # error handling for failure to load
+    if graph is None:
+        return jsonify({"error": "Graph failed to load"}), 500
+    
+    data = request.json
+    start = data.get('start')
+    end = data.get('end')
+    
+    # error handling for no id 
+    if not start or not end:
+        return jsonify({"error": "Missing start or end user ID"}), 400
+    
+    # Run both algorithms
+    dijkstra_result = run_dijkstra(graph, start, end)
+    astar_result = a_star(graph, start, end)
+    
+    # Debugging - log success
+    print(f" SUCCESS: Path found from {start} to {end}")
+    print(f" - Dijkstra path length: {len(dijkstra_result['path'])}")
+    print(f" - A* path length: {len(astar_result['path'])}")
+
+    # Return both results
+    return jsonify({
+        "dijkstra": dijkstra_result,
+        "a_star": astar_result
+    })
 
 # Execute 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(port=5000, debug=True)
