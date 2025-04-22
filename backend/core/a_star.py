@@ -23,10 +23,18 @@ def a_star(graph, start, target):
     best = {start: 0} # best from start to node currently
     f_total = {start: heuristic(start, target)} # total path
     nodes_expanded = 0 #counts expanded nodes
+    visited = set() #in Dijkstra tracks visited nodes -S
+    steps = [] #in Dijkstra stores each visual step -S
 
     #main search loop below using while loop to continue until nothing left to explore
     while open_set: 
         current_f, current = heapq.heappop(open_set) #pop lowest f score node
+        steps.append({
+        "current": current,#the current node being processed -S
+        "queue": [node for _, node in open_set],# the queue -S
+        "visited": list(visited) #what weve seen so far - S
+})
+
         nodes_expanded += 1
 #if target then done with loop 
         if current == target:
@@ -47,7 +55,7 @@ def a_star(graph, start, target):
     # rebuild path if target was reached
     
     if target in came_from or start == target:
-        path = reconstruct_path(came_from, target)
+        path = new_path(came_from, target)  #I think this function name was wrong? -S
         cost = best[target]
 
     #or none if no path found
@@ -55,5 +63,17 @@ def a_star(graph, start, target):
         path = None
         cost = None
 #return performances
-    
-    return {'path': path, 'cost': cost, 'nodes_expanded': nodes_expanded, 'time_sec': end_time - start_time, 'mem_bytes': peak}
+    #used Dijkstras format -s
+    return {
+    "algorithm": "a_star",
+    "graph": "twitter_combined.txt",
+    "start": start,
+    "end": target,
+    "path": path if path else [],
+    "cost": cost if cost else -1,
+    "visited": list(visited),
+    "steps": steps,
+    "nodes_expanded": nodes_expanded,
+    "runtime_seconds": round(end_time - start_time, 6),
+    "memory_bytes": peak
+}
