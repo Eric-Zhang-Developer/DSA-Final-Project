@@ -35,6 +35,7 @@ def a_star(graph, start, target):
     #main search loop below using while loop to continue until nothing left to explore
     while open_set: 
         current_f, current = heapq.heappop(open_set) #pop lowest f score node
+        visited.add(current) #update visited
         steps.append({
         "current": current,#the current node being processed -S
         "queue": [node for _, node in open_set],# the queue -S
