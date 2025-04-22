@@ -137,7 +137,7 @@ export default function Home() {
 
             {/* Display the Path */}
             <div className="w-full text-center">
-              <h4 className="text-lg mb-1">Path Found:</h4>
+              <h4 className="text-xl text-emerald-400 mb-1">Path Found:</h4>
               <p className="text-sm bg-slate-700 p-2">
                 {results.dijkstra.path && results.dijkstra.path.length > 0
                   ? results.dijkstra.path.join(" -> ")
@@ -149,7 +149,7 @@ export default function Home() {
             <div className="flex flex-col md:flex-row gap-8 md:gap-16 w-full justify-center">
               {/* Dijkstra Column */}
               <div className="flex flex-col gap-2 text-center md:text-left">
-                <h3 className="text-xl">Dijkstra&apos;s Results:</h3>
+                <h3 className="text-xl text-emerald-400">Dijkstra&apos;s Results:</h3>
                 <p>
                   Time: {results.dijkstra?.runtime_seconds?.toFixed(4) ?? "N/A"}{" "}
                   s
@@ -163,7 +163,7 @@ export default function Home() {
 
               {/* A* Column */}
               <div className="flex flex-col gap-2 text-center md:text-left">
-                <h3 className="text-xl">A* Results:</h3>
+                <h3 className="text-xl text-emerald-400">A* Results:</h3>
                 <p>
                   Time: {results.a_star?.runtime_seconds?.toFixed(4) ?? "N/A"} s
                 </p>
