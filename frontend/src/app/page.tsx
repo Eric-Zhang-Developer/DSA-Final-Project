@@ -63,29 +63,40 @@ export default function Home() {
   return (
     <main className="flex flex-col mx-auto items-center p-4 gap-8">
       <h1 className="text-3xl">Placeholder Title</h1>
+      
       {/* User Input Boxes to Enter User ID's */}
-      <div className="flex flex-row gap-8">
-        <div className="flex flex-col items items-center">
-          <p className="pb-2 text-lg">User 1</p>
+      <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 w-full max-w-md">
+        <div className="flex flex-col items-center flex-1">
+          <label
+            htmlFor="user1-input" 
+            className="pb-1.5 text-base font-medium text-emerald-300 uppercase tracking-wider" // Sci-fi label style
+          >
+            User 1
+          </label>
           <input
             type="text"
             onChange={handleSetUser1}
             value={user1}
-            className="bg-white text-black text-lg p-0.5 rounded-lg pl-2"
-            placeholder="Enter Start User Id"
+            className="bg-slate-800 border border-slate-600 text-gray-100 text-lg p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 placeholder-slate-500 transition duration-200 shadow-inner"
+            placeholder="User ID" 
           ></input>
         </div>
-        <div className="flex flex-col items items-center">
-          <p className="pb-2 text-lg"> User 2</p>
+        <div className="flex flex-col items-center flex-1">
+          <label
+            className="pb-1.5 text-base font-medium text-emerald-300 uppercase tracking-wider" // Sci-fi label style
+          >
+            User 2
+          </label>
           <input
             type="text"
             onChange={handleSetUser2}
             value={user2}
-            className="bg-white text-black text-lg p-0.5 rounded-lg pl-2"
-            placeholder="Enter End User Id"
+            className="bg-slate-800 border border-slate-600 text-gray-100 text-lg p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 placeholder-slate-500 transition duration-200 shadow-inner"
+            placeholder="User ID" 
           ></input>
         </div>
       </div>
+      
       {/* Compare */}
       <button
         onClick={handleCompare}
@@ -126,7 +137,6 @@ export default function Home() {
                   : "N/A"}
               </p>
             </div>
-
 
             {/* Dijkstra's vs A* Comparison */}
             <div className="flex flex-col md:flex-row gap-8 md:gap-16 w-full justify-center">
