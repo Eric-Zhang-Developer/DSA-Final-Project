@@ -110,7 +110,6 @@ export default function Home() {
         {/* Appears ONLY when isLoading is false AND error is null AND results has data */}
         {!isLoading && !error && results && (
           <section className="flex flex-col bg-slate-800 p-6 rounded-2xl items-center gap-6 w-full mt-4">
-            
             {/* Overall Summary */}
             <h3 className="text-xl text-center">
               {results.dijkstra.cost !== null && results.dijkstra.cost >= 0
@@ -118,9 +117,19 @@ export default function Home() {
                 : `No path found between ${user1} and ${user2}`}{" "}
             </h3>
 
+            {/* Display the Path */}
+            <div className="w-full text-center">
+              <h4 className="text-lg mb-1">Path Found:</h4>
+              <p className="text-sm bg-slate-700 p-2">
+                {results.dijkstra.path && results.dijkstra.path.length > 0
+                  ? results.dijkstra.path.join(" -> ")
+                  : "N/A"}
+              </p>
+            </div>
+
+
             {/* Dijkstra's vs A* Comparison */}
             <div className="flex flex-col md:flex-row gap-8 md:gap-16 w-full justify-center">
-
               {/* Dijkstra Column */}
               <div className="flex flex-col gap-2 text-center md:text-left">
                 <h3 className="text-xl">Dijkstra&apos;s Results:</h3>
