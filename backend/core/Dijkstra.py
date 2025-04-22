@@ -1,4 +1,4 @@
-#written by Sayhan Khan
+#written by Sayhan
 #TOOLS
 import heapq  #for shortest distance
 
