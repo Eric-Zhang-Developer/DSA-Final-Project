@@ -33,7 +33,8 @@ export default function Home() {
 
     try {
       // call backend
-      const response = await fetch("api/compare", {
+      // localhost for now 
+      const response = await fetch("http://localhost:5000/api/compare", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ start: user1, end: user2 }),
