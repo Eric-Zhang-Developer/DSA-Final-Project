@@ -62,39 +62,57 @@ export default function Home() {
 
   return (
     <main className="flex flex-col mx-auto items-center p-4 gap-8">
-      <h1 className="text-3xl">Placeholder Title</h1>
+      <h1 className="text-3xl sm:text-4xl font-bold text-center text-emerald-400 tracking-wide drop-shadow-md">
+        TwitterTraverse
+      </h1>
+
       {/* User Input Boxes to Enter User ID's */}
-      <div className="flex flex-row gap-8">
-        <div className="flex flex-col items items-center">
-          <p className="pb-2 text-lg">User 1</p>
+      <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 w-full max-w-md">
+        <div className="flex flex-col items-center flex-1">
+          <label
+            htmlFor="user1-input"
+            className="pb-1.5 text-base font-medium text-emerald-300 uppercase tracking-wider" // Sci-fi label style
+          >
+            User 1
+          </label>
           <input
             type="text"
             onChange={handleSetUser1}
             value={user1}
-            className="bg-white text-black text-lg p-0.5 rounded-lg pl-2"
-            placeholder="Enter Start User Id"
+            className="bg-slate-800 border border-slate-600 text-gray-100 text-lg p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 placeholder-slate-500 transition duration-200 shadow-inner"
+            placeholder="User ID"
           ></input>
         </div>
-        <div className="flex flex-col items items-center">
-          <p className="pb-2 text-lg"> User 2</p>
+        <div className="flex flex-col items-center flex-1">
+          <label
+            className="pb-1.5 text-base font-medium text-emerald-300 uppercase tracking-wider" // Sci-fi label style
+          >
+            User 2
+          </label>
           <input
             type="text"
             onChange={handleSetUser2}
             value={user2}
-            className="bg-white text-black text-lg p-0.5 rounded-lg pl-2"
-            placeholder="Enter End User Id"
+            className="bg-slate-800 border border-slate-600 text-gray-100 text-lg p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 placeholder-slate-500 transition duration-200 shadow-inner"
+            placeholder="User ID"
           ></input>
         </div>
       </div>
+
       {/* Compare */}
       <button
         onClick={handleCompare}
-        className="transform bg-slate-800 text-white text-xl
-          py-3 px-4 mr-4 rounded-lg shadow-md 
-          transition hover:shadow-xl hover:bg-emerald-500 hover:scale-105 cursor-pointer
-          "
+        disabled={isLoading || !user1 || !user2} // Keep disabled logic for styling state
+        className="
+    transform bg-emerald-600 text-white text-lg font-semibold tracking-wide
+    py-2.5 px-8 rounded shadow-md border border-emerald-700
+    transition duration-200
+    hover:bg-emerald-500 hover:shadow-lg hover:border-emerald-500 hover:scale-105
+    hover:cursor-pointer
+    disabled:opacity-40"
       >
-        {isLoading ? "Comparing..." : "Compare"}
+        {/* Keep the dynamic text based on isLoading state */}
+        {isLoading ? "ANALYZING..." : "ANALYZE CONNECTION"}
       </button>
 
       {/* --- Display Area --- */}
@@ -119,7 +137,7 @@ export default function Home() {
 
             {/* Display the Path */}
             <div className="w-full text-center">
-              <h4 className="text-lg mb-1">Path Found:</h4>
+              <h4 className="text-xl text-emerald-400 mb-1">Path Found:</h4>
               <p className="text-sm bg-slate-700 p-2">
                 {results.dijkstra.path && results.dijkstra.path.length > 0
                   ? results.dijkstra.path.join(" -> ")
@@ -127,12 +145,11 @@ export default function Home() {
               </p>
             </div>
 
-
             {/* Dijkstra's vs A* Comparison */}
             <div className="flex flex-col md:flex-row gap-8 md:gap-16 w-full justify-center">
               {/* Dijkstra Column */}
               <div className="flex flex-col gap-2 text-center md:text-left">
-                <h3 className="text-xl">Dijkstra&apos;s Results:</h3>
+                <h3 className="text-xl text-emerald-400">Dijkstra&apos;s Results:</h3>
                 <p>
                   Time: {results.dijkstra?.runtime_seconds?.toFixed(4) ?? "N/A"}{" "}
                   s
@@ -146,7 +163,7 @@ export default function Home() {
 
               {/* A* Column */}
               <div className="flex flex-col gap-2 text-center md:text-left">
-                <h3 className="text-xl">A* Results:</h3>
+                <h3 className="text-xl text-emerald-400">A* Results:</h3>
                 <p>
                   Time: {results.a_star?.runtime_seconds?.toFixed(4) ?? "N/A"} s
                 </p>
