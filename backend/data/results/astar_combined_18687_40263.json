@@ -1,0 +1,19 @@
+{
+  "algorithm": "a_star",
+  "graph": "twitter_combined.txt",
+  "start": "18687",
+  "end": "40263",
+  "path": [],
+  "cost": -1,
+  "visited": [],
+  "steps": [
+    {
+      "current": "18687",
+      "queue": [],
+      "visited": []
+    }
+  ],
+  "nodes_expanded": 1,
+  "runtime_seconds": 5.3e-05,
+  "memory_bytes": 464
+}
