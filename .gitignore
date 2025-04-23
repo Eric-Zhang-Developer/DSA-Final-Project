@@ -41,4 +41,3 @@ frontend/*.tsbuildinfo
 frontend/next-env.d.ts
 
 # backend data
-backend/data/twitter_combined.txt
