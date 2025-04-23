@@ -20,6 +20,14 @@ except Exception as e:
 
 @app.route('/api/compare', methods=['POST'])
 def compare():
+
+    if request.method == 'OPTIONS':
+        response = jsonify({})
+        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        return response
+
     # error handling for failure to load
     if graph is None:
         return jsonify({"error": "Graph failed to load"}), 500
@@ -43,12 +51,16 @@ def compare():
 
     return jsonify({
         "dijkstra": {
+            "start": dijkstra_result["start"],  
+            "end": dijkstra_result["end"],     
             "runtime_seconds": dijkstra_result["runtime_seconds"],
             "nodes_expanded": dijkstra_result["nodes_expanded"],
             "cost": dijkstra_result["cost"],
-            "path": dijkstra_result["path"]  
+            "path": dijkstra_result["path"]
         },
         "a_star": {
+            "start": astar_result["start"],
+            "end": astar_result["end"],
             "runtime_seconds": astar_result["runtime_seconds"],
             "nodes_expanded": astar_result["nodes_expanded"],
             "cost": astar_result["cost"],
