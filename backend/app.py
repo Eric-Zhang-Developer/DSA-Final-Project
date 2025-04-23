@@ -41,10 +41,19 @@ def compare():
     print(f" - Dijkstra path length: {len(dijkstra_result['path'])}")
     print(f" - A* path length: {len(astar_result['path'])}")
 
-    # Return both results
     return jsonify({
-        "dijkstra": dijkstra_result,
-        "a_star": astar_result
+        "dijkstra": {
+            "runtime_seconds": dijkstra_result["runtime_seconds"],
+            "nodes_expanded": dijkstra_result["nodes_expanded"],
+            "cost": dijkstra_result["cost"],
+            "path": dijkstra_result["path"]  
+        },
+        "a_star": {
+            "runtime_seconds": astar_result["runtime_seconds"],
+            "nodes_expanded": astar_result["nodes_expanded"],
+            "cost": astar_result["cost"],
+            "path": astar_result["path"]
+        }
     })
 
 # Execute 
