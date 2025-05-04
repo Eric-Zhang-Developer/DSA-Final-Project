@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "TwitterTraverse",
   description: "It's a small world",
+  icons: {
+    icon: '/favicon.png'
+  }
 };
 
 export default function RootLayout({
