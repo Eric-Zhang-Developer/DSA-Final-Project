@@ -5,6 +5,16 @@
 import { useState } from "react";
 
 export default function Home() {
+  
+  interface ConnectionPair {
+    user1: string;
+    user2: string;
+  }
+
+  const connectionPairs: ConnectionPair[] = [
+    {user1: "214328887", user2: "34428380"},
+  ]
+
   // State mangement, variables live here
   const [user1, setUser1] = useState<string>("");
   const [user2, setUser2] = useState<string>("");
@@ -21,6 +31,13 @@ export default function Home() {
     setUser2(event.target.value);
   };
 
+  // Select Random element from static pair and assign it to user1  and user2
+  function getRandomElement(): void{
+    const randomIndex = Math.floor(Math.random() * connectionPairs.length);
+    setUser1(connectionPairs[randomIndex].user1)
+    setUser2(connectionPairs[randomIndex].user2)
+  }
+
   // Handles comparison
   // The big meaty logic is here
   // Skeleton for now
@@ -30,6 +47,8 @@ export default function Home() {
     setIsLoading(true);
     setResults(null);
     setError(null);
+    getRandomElement();
+
 
     try {
       // call backend
