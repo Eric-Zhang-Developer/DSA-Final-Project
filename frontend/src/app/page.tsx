@@ -5,7 +5,6 @@
 import { useState } from "react";
 
 export default function Home() {
-  
   interface ConnectionPair {
     user1: string;
     user2: string;
@@ -13,44 +12,43 @@ export default function Home() {
 
   const connectionPairs: ConnectionPair[] = [
     // Single step
-    {user1: "214328887", user2: "34428380"},
-    {user1: "380580781", user2: "18996905"},
-    {user1: "17116707", user2: "28465635"},
-    {user1: "221036078", user2: "153460275"},
-    {user1: "107830991", user2: "17868918"},
-    
+    { user1: "214328887", user2: "34428380" },
+    { user1: "380580781", user2: "18996905" },
+    { user1: "17116707", user2: "28465635" },
+    { user1: "221036078", user2: "153460275" },
+    { user1: "107830991", user2: "17868918" },
+
     // Two steps
-    {user1: "222261763", user2: "222411742"},
-    {user1: "88097807", user2: "109740608"},
-    {user1: "254839786", user2: "35359596"},
-    {user1: "74107696", user2: "221036078"},
-    {user1: "400689940", user2: "131613362"},
-    {user1: "133055665", user2: "187773078"},
+    { user1: "222261763", user2: "222411742" },
+    { user1: "88097807", user2: "109740608" },
+    { user1: "254839786", user2: "35359596" },
+    { user1: "74107696", user2: "221036078" },
+    { user1: "400689940", user2: "131613362" },
+    { user1: "133055665", user2: "187773078" },
 
     // Three steps
-    {user1: "17759158", user2: "355823615"},
-    {user1: "18996905", user2: "8163442"},
-    {user1: "34428380", user2: "260769396"},
-    {user1: "394263193", user2: "176222605"},
-    {user1: "394263193", user2: "26649453"},
+    { user1: "17759158", user2: "355823615" },
+    { user1: "18996905", user2: "8163442" },
+    { user1: "34428380", user2: "260769396" },
+    { user1: "394263193", user2: "176222605" },
+    { user1: "394263193", user2: "26649453" },
 
     // Four steps
-    {user1: "21146135", user2: "404376053"},
+    { user1: "21146135", user2: "404376053" },
 
-    // Five steps 
-    {user1: "283306479", user2: "14050306"},
+    // Five steps
+    { user1: "283306479", user2: "14050306" },
 
-    // Invalid 
-    {user1: "2704495328", user2: "8163442"},
-    {user1: "2704498", user2: "2163442"},
-
-  ]
+    // Invalid
+    { user1: "2704495328", user2: "8163442" },
+    { user1: "2704498", user2: "2163442" },
+  ];
 
   // State management, variables live here
   const [user1, setUser1] = useState<string>("");
   const [user2, setUser2] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const [shouldPulse, setShouldPulse] = useState(false);
   const [results, setResults] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -63,10 +61,14 @@ export default function Home() {
   };
 
   // Select Random element from static pair and assign it to user1  and user2
-  function getRandomElement(): void{
+  function getRandomElement(): void {
     const randomIndex = Math.floor(Math.random() * connectionPairs.length);
-    setUser1(connectionPairs[randomIndex].user1)
-    setUser2(connectionPairs[randomIndex].user2)
+    setUser1(connectionPairs[randomIndex].user1);
+    setUser2(connectionPairs[randomIndex].user2);
+
+    // Trigger pulse animation on the analyze button 
+    setShouldPulse(true);
+    setTimeout(() => setShouldPulse(false), 2000); 
   }
 
   // Handles comparison
@@ -78,8 +80,6 @@ export default function Home() {
     setIsLoading(true);
     setResults(null);
     setError(null);
-    
-
 
     try {
       // call backend
@@ -151,7 +151,7 @@ export default function Home() {
 
       <button
         onClick={getRandomElement}
-        disabled={isLoading || !user1 || !user2} // Keep disabled logic for styling state
+        disabled={isLoading} // Keep disabled logic for styling state
         className="
     transform bg-emerald-600 text-white text-lg font-semibold tracking-wide
     py-2.5 px-8 rounded shadow-md border border-emerald-700
@@ -165,27 +165,28 @@ export default function Home() {
 
       {/* Compare */}
       <button
-        onClick={handleCompare}
-        disabled={isLoading || !user1 || !user2} // Keep disabled logic for styling state
-        className="
-    transform bg-emerald-600 text-white text-md font-semibold tracking-wide
-    py-2.5 px-8 rounded shadow-md border border-emerald-700
-    transition duration-200
-    hover:bg-emerald-500 hover:shadow-lg hover:border-emerald-500 hover:scale-105
-    hover:cursor-pointer
-    disabled:opacity-40"
-      >
-        {/* Keep the dynamic text based on isLoading state */}
-        {isLoading ? "ANALYZING..." : "ANALYZE CONNECTION"}
-      </button>
+          id="analyze-btn"
+          onClick={handleCompare}
+          disabled={isLoading || !user1 || !user2}
+          className={`
+            transform bg-slate-700 text-white text-sm font-medium
+            py-2 px-6 rounded shadow-md border border-slate-600
+            transition duration-200
+            hover:bg-slate-600 hover:shadow-lg hover:border-slate-500
+            hover:cursor-pointer
+            disabled:opacity-40
+            disabled:cursor-not-allowed
+            ${shouldPulse && user1 && user2 ? 'animate-pulse ring-2 ring-emerald-400' : ''}
+          `}
+        >
+          {isLoading ? "Analyzing..." : "Analyze Connection →"}
+        </button>
 
       {/* --- Display Area --- */}
       <div className="w-full min-h-[250px]">
         {/* Error Handling */}
         {!isLoading && error && (
-          <p className="text-center text-red-500 text-lg pt-4">
-            Error: {error}
-          </p>
+          <p className="text-center text-red-500 text-lg pt-4">Error: {error}</p>
         )}
 
         {/* Main Results */}
@@ -214,27 +215,16 @@ export default function Home() {
               {/* Dijkstra Column */}
               <div className="flex flex-col gap-2 text-center md:text-left">
                 <h3 className="text-xl text-emerald-400">Dijkstra&apos;s Results:</h3>
-                <p>
-                  Time: {results.dijkstra?.runtime_seconds?.toFixed(4) ?? "N/A"}{" "}
-                  s
-                </p>
-                <p>
-                  Nodes Explored:{" "}
-                  {results.dijkstra?.nodes_expanded?.toLocaleString() ?? "N/A"}
-                </p>
+                <p>Time: {results.dijkstra?.runtime_seconds?.toFixed(4) ?? "N/A"} s</p>
+                <p>Nodes Explored: {results.dijkstra?.nodes_expanded?.toLocaleString() ?? "N/A"}</p>
                 <p>Path Length: {results.dijkstra?.cost ?? "N/A"}</p>
               </div>
 
               {/* A* Column */}
               <div className="flex flex-col gap-2 text-center md:text-left">
                 <h3 className="text-xl text-emerald-400">A* Results:</h3>
-                <p>
-                  Time: {results.a_star?.runtime_seconds?.toFixed(4) ?? "N/A"} s
-                </p>
-                <p>
-                  Nodes Explored:{" "}
-                  {results.a_star?.nodes_expanded?.toLocaleString() ?? "N/A"}
-                </p>
+                <p>Time: {results.a_star?.runtime_seconds?.toFixed(4) ?? "N/A"} s</p>
+                <p>Nodes Explored: {results.a_star?.nodes_expanded?.toLocaleString() ?? "N/A"}</p>
                 <p>Path Length: {results.a_star?.cost ?? "N/A"}</p>
               </div>
             </div>
