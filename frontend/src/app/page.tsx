@@ -112,7 +112,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col mx-auto items-center p-4 gap-8">
-      <h1 className="text-3xl sm:text-4xl font-bold text-center text-emerald-400 tracking-wide drop-shadow-md">
+      <h1 className="text-4xl sm:text-5xl font-bold text-center text-emerald-400 tracking-wide drop-shadow-md">
         TwitterTraverse
       </h1>
 
@@ -121,7 +121,7 @@ export default function Home() {
         <div className="flex flex-col items-center flex-1">
           <label
             htmlFor="user1-input"
-            className="pb-1.5 text-base font-medium text-emerald-300 uppercase tracking-wider" // Sci-fi label style
+            className="pb-1.5 text-lg font-medium text-emerald-300 uppercase tracking-wider" // Sci-fi label style
           >
             User 1
           </label>
@@ -135,7 +135,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col items-center flex-1">
           <label
-            className="pb-1.5 text-base font-medium text-emerald-300 uppercase tracking-wider" // Sci-fi label style
+            className="pb-1.5 text-lg font-medium text-emerald-300 uppercase tracking-wider" // Sci-fi label style
           >
             User 2
           </label>
@@ -153,14 +153,14 @@ export default function Home() {
         onClick={getRandomElement}
         disabled={isLoading} // Keep disabled logic for styling state
         className="
-    transform bg-emerald-600 text-white text-lg font-semibold tracking-wide
-    py-2.5 px-8 rounded shadow-md border border-emerald-700
+    transform bg-emerald-600 text-white text-lg sm:text-2xl font-semibold tracking-wide
+    py-3 sm:px-10 px-8 rounded shadow-md border border-emerald-700
     transition duration-200
     hover:bg-emerald-500 hover:shadow-lg hover:border-emerald-500 hover:scale-105
     hover:cursor-pointer
     disabled:opacity-40"
       >
-        🎲 TRY RANDOM CONNECTION 🎲
+        🎲 Try Random Connection 🎲
       </button>
 
       {/* Compare */}
@@ -169,7 +169,7 @@ export default function Home() {
           onClick={handleCompare}
           disabled={isLoading || !user1 || !user2}
           className={`
-            transform bg-slate-700 text-white text-sm font-medium
+            transform bg-slate-700 text-white text-md font-medium
             py-2 px-6 rounded shadow-md border border-slate-600
             transition duration-200
             hover:bg-slate-600 hover:shadow-lg hover:border-slate-500
@@ -192,7 +192,7 @@ export default function Home() {
         {/* Main Results */}
         {/* Appears ONLY when isLoading is false AND error is null AND results has data */}
         {!isLoading && !error && results && (
-          <section className="flex flex-col bg-slate-800 p-6 rounded-2xl items-center gap-6 w-full mt-4">
+          <section className="flex flex-col bg-slate-800 p-6 rounded-2xl items-center gap-6 w-full mt-4 container mx-auto">
             {/* Overall Summary */}
             <h3 className="text-xl text-center">
               {results.dijkstra.cost !== null && results.dijkstra.cost >= 0
