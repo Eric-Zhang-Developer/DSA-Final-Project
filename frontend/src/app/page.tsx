@@ -46,7 +46,7 @@ export default function Home() {
 
   ]
 
-  // State mangement, variables live here
+  // State management, variables live here
   const [user1, setUser1] = useState<string>("");
   const [user2, setUser2] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -54,7 +54,7 @@ export default function Home() {
   const [results, setResults] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // Handler fuctions for reading input
+  // Handler functions for reading input
   const handleSetUser1 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser1(event.target.value);
   };
@@ -149,12 +149,26 @@ export default function Home() {
         </div>
       </div>
 
+      <button
+        onClick={getRandomElement}
+        disabled={isLoading || !user1 || !user2} // Keep disabled logic for styling state
+        className="
+    transform bg-emerald-600 text-white text-lg font-semibold tracking-wide
+    py-2.5 px-8 rounded shadow-md border border-emerald-700
+    transition duration-200
+    hover:bg-emerald-500 hover:shadow-lg hover:border-emerald-500 hover:scale-105
+    hover:cursor-pointer
+    disabled:opacity-40"
+      >
+        🎲 TRY RANDOM CONNECTION 🎲
+      </button>
+
       {/* Compare */}
       <button
         onClick={handleCompare}
         disabled={isLoading || !user1 || !user2} // Keep disabled logic for styling state
         className="
-    transform bg-emerald-600 text-white text-lg font-semibold tracking-wide
+    transform bg-emerald-600 text-white text-md font-semibold tracking-wide
     py-2.5 px-8 rounded shadow-md border border-emerald-700
     transition duration-200
     hover:bg-emerald-500 hover:shadow-lg hover:border-emerald-500 hover:scale-105
