@@ -12,7 +12,15 @@ export default function Home() {
   }
 
   const connectionPairs: ConnectionPair[] = [
+    // Single step
     {user1: "214328887", user2: "34428380"},
+    {user1: "380580781", user2: "18996905"},
+    {user1: "17116707", user2: "28465635"},
+    {user1: "221036078", user2: "153460275"},
+    {user1: "107830991", user2: "17868918"},
+    // Two steps
+    {user1: "222261763", user2: "222411742"},
+    {user1: "88097807", user2: "109740608"},
   ]
 
   // State mangement, variables live here
@@ -47,7 +55,7 @@ export default function Home() {
     setIsLoading(true);
     setResults(null);
     setError(null);
-    getRandomElement();
+    
 
 
     try {
