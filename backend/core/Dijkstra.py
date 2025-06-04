@@ -10,7 +10,6 @@ def run_dijkstra(graph, start, end):
     distance = {start: 0} #shortest distance from the start node
     parent = {} #points to the node that came before it
     seen = set()  #stores nodes we saw already
-    steps = [] #list for possible frontend animation
    #this keeps going until were done with every node
     start_time = time.perf_counter()  # start timing
     while queue: 
@@ -18,12 +17,7 @@ def run_dijkstra(graph, start, end):
         if on_this_node in seen: # skip node if seen
             continue
         seen.add(on_this_node) # mark this node as seen
-        #record this moment for possible frontend animation
-        steps.append({
-            "current": on_this_node, #the node were on
-            "queue": [node for _, node in queue], #queue for next
-            "visited": list(seen) #we saw already
-        })
+
         # if we go to end, finish
         if on_this_node == end:
             break
@@ -58,7 +52,6 @@ def run_dijkstra(graph, start, end):
     "path": path,
     "cost": distance.get(end, -1),
     "visited": list(seen),
-    "steps": steps,
     "nodes_expanded": len(seen), #time
     "runtime_seconds": runtime #time
 }
