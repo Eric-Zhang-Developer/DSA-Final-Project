@@ -30,18 +30,11 @@ def a_star(graph, start, target):
     f_total = {start: heuristic(start, target)} # total path
     nodes_expanded = 0 #counts expanded nodes
     visited = set() #in Dijkstra tracks visited nodes -S
-    steps = [] #in Dijkstra stores each visual step -S
 
     #main search loop below using while loop to continue until nothing left to explore
     while open_set: 
         current_f, current = heapq.heappop(open_set) #pop lowest f score node
         visited.add(current) #update visited
-        steps.append({
-        "current": current,#the current node being processed -S
-        "queue": [node for _, node in open_set],# the queue -S
-        "visited": list(visited) #what weve seen so far - S
-})
-
         nodes_expanded += 1
 #if target then done with loop 
         if current == target:
@@ -79,7 +72,6 @@ def a_star(graph, start, target):
     "path": path if path else [],
     "cost": cost if cost else -1,
     "visited": list(visited),
-    "steps": steps,
     "nodes_expanded": nodes_expanded,
     "runtime_seconds": round(end_time - start_time, 6),
     "memory_bytes": peak

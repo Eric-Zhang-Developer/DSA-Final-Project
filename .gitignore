@@ -41,3 +41,9 @@ frontend/*.tsbuildinfo
 frontend/next-env.d.ts
 
 # backend data
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+
