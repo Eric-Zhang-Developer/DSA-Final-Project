@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from core.load_graph import load_path
 from core.Dijkstra import run_dijkstra
-from core.a_star import a_star
+from core.bfs import bfs
 import os
 
 # Setup
@@ -42,12 +42,18 @@ def compare():
             
             # Run both algorithms
             dijkstra_result = run_dijkstra(graph, start, end)
-            astar_result = a_star(graph, start, end)
+            bfs_result = bfs(graph, start, end)
             
             # Debugging - log success
             print(f" SUCCESS: Path found from {start} to {end}")
             print(f" - Dijkstra path length: {len(dijkstra_result['path'])}")
-            print(f" - A* path length: {len(astar_result['path'])}")
+            print(f" - BFS path length: {len(bfs_result['path'])}")
+            print(f" TIME: ")
+            print(f" - Dijkstra time: {dijkstra_result['runtime_seconds']}")
+            print(f" - BFS time: {bfs_result['runtime_seconds']}")
+            print(f" NODES EXPLORED: ")
+            print(f" - Dijkstra time: {dijkstra_result['runtime_seconds']}")
+            print(f" - BFS time: {bfs_result['runtime_seconds']}")
 
             return jsonify({
                 "dijkstra": {
@@ -58,13 +64,13 @@ def compare():
                     "cost": dijkstra_result["cost"],
                     "path": dijkstra_result["path"]
                 },
-                "a_star": {
-                    "start": astar_result["start"],
-                    "end": astar_result["end"],
-                    "runtime_seconds": astar_result["runtime_seconds"],
-                    "nodes_expanded": astar_result["nodes_expanded"],
-                    "cost": astar_result["cost"],
-                    "path": astar_result["path"]
+                "bfs": {
+                    "start": bfs_result["start"],
+                    "end": bfs_result["end"],
+                    "runtime_seconds": bfs_result["runtime_seconds"],
+                    "nodes_expanded": bfs_result["nodes_expanded"],
+                    "cost": bfs_result["cost"],
+                    "path": bfs_result["path"]
                 }
             })
         except Exception as e:
