@@ -84,6 +84,7 @@ export default function Home() {
     try {
       // call backend
       // http://127.0.0.1:5001/api/compare
+      // call production 
       // https://cop3530-final-project-twitter-traverse.onrender.com/api/compare
       const response = await fetch("https://cop3530-final-project-twitter-traverse.onrender.com/api/compare", {
         method: "POST",
@@ -210,11 +211,11 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Dijkstra's vs A* Comparison */}
+            {/* Dijkstra's vs BFS Comparison */}
             <div className="flex flex-col md:flex-row gap-8 md:gap-16 w-full justify-center">
               {/* Dijkstra Column */}
               <div className="flex flex-col gap-2 text-center md:text-left">
-                <h3 className="text-xl text-emerald-400">Dijkstra&apos;s Results:</h3>
+                <h3 className="text-xl text-emerald-400">Dijkstra&apos;s Algorithm:</h3>
                 <p>Time: {results.dijkstra?.runtime_seconds?.toFixed(4) ?? "N/A"} s</p>
                 <p>Nodes Explored: {results.dijkstra?.nodes_expanded?.toLocaleString() ?? "N/A"}</p>
                 <p>Path Length: {results.dijkstra?.cost ?? "N/A"}</p>
@@ -222,10 +223,10 @@ export default function Home() {
 
               {/* A* Column */}
               <div className="flex flex-col gap-2 text-center md:text-left">
-                <h3 className="text-xl text-emerald-400">A* Results:</h3>
-                <p>Time: {results.a_star?.runtime_seconds?.toFixed(4) ?? "N/A"} s</p>
-                <p>Nodes Explored: {results.a_star?.nodes_expanded?.toLocaleString() ?? "N/A"}</p>
-                <p>Path Length: {results.a_star?.cost ?? "N/A"}</p>
+                <h3 className="text-xl text-emerald-400">Breadth-First Search:</h3>
+                <p>Time: {results.bfs?.runtime_seconds?.toFixed(4) ?? "N/A"} s</p>
+                <p>Nodes Explored: {results.bfs?.nodes_expanded?.toLocaleString() ?? "N/A"}</p>
+                <p>Path Length: {results.bfs?.cost ?? "N/A"}</p>
               </div>
             </div>
           </section>
