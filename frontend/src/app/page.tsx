@@ -86,7 +86,7 @@ export default function Home() {
       // http://127.0.0.1:5001/api/compare
       // call production 
       // https://cop3530-final-project-twitter-traverse.onrender.com/api/compare
-      const response = await fetch("http://127.0.0.1:5001/api/compare", {
+      const response = await fetch("https://cop3530-final-project-twitter-traverse.onrender.com/api/compare", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ start: user1, end: user2 }),
