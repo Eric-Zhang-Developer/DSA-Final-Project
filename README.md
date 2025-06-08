@@ -1,25 +1,23 @@
 # DSA-Final-Project - TwitterTraverse
-A web application that compares Dijkstra's Algorithm and A* Algorithm for finding shortest paths between Twitter users in a social network graph.
+A web application that compares Dijkstra's Algorithm and Breadth-first search for finding shortest paths between Twitter users in a social network graph.
 
 ## Overview
-TwitterTraverse visualizes and benchmarks pathfinding algorithms on Twitter's social network. Enter two Twitter user IDs and see real-time performance metrics comparing how Dijkstra's and A* algorithms find connections between users.
+TwitterTraverse visualizes and benchmarks path-finding algorithms on Twitter's social network. Enter two Twitter user IDs and see real-time performance metrics comparing how Dijkstra's and Breadth-first search algorithms find connections between users.
 
-## Appoaches to Testing: 
+## Approaches to Testing:  
 
-### 1. Direct Use
--- Warning - May take long amounts of time comparing, if comparison takes too long, refresh -- 
+
+### 1. Use Examples:
+1. Access this website: https://twitter-traverse.vercel.app/
+2. Click the "Try Random Connection" Button (Preset random pairs)
+3. Then Analyze Connection 
+
+### 2. Direct Use
 1. Download the file: backend/data/twitter_combined.txt
 2. Search for two nodes in the file.
 3. Access this website: https://twitter-traverse.vercel.app/
 4. Input the two nodes and check results
 
-### 2. Use Examples:
-1. Access this website: https://twitter-traverse.vercel.app/
-2. Try some of these examples: Format : User 1 -> User 2
-   - 1 -> 2
-   - 214328887 -> 34428380
-   - 222261763 -> 222411742
-   - 88097807 -> 109740608
 
 
 ## Setup:
