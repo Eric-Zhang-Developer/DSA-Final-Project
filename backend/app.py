@@ -9,7 +9,7 @@ import os
 # Setup
 app = Flask(__name__)
 CORS(app, origins=[
-    # "http://localhost:3000",
+    "http://localhost:3000",
     "https://twitter-traverse.vercel.app",
     "https://twitter-traverse.vercel.app/"
 ])
@@ -17,7 +17,7 @@ CORS(app, origins=[
 # Load graph once at startup
 print("Loading Twitter graph...")
 try:
-    graph = load_path("data/twitter_combined.txt")
+    graph = load_path("backend/data/twitter_combined.txt")
     print("Graph loaded successfully!")
 except Exception as e:
     print(f"Error loading graph: {e}")
