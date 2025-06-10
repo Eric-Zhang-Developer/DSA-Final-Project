@@ -2,6 +2,7 @@
 // Being lazy with eslint here...
 
 "use client";
+import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -71,25 +72,24 @@ export default function Home() {
     setTimeout(() => setShouldPulse(false), 2000);
   }
 
-
-  // Server will start up from cold when page is initially loaded 
+  // Server will start up from cold when page is initially loaded
   useEffect(() => {
     warmUpServer();
   }, []);
 
   const warmUpServer = async () => {
     console.log("Warming up Render Server!!");
-    try{
-      const response = await fetch("https://cop3530-final-project-twitter-traverse.onrender.com/api/health");
-      if (response.ok){
+    try {
+      const response = await fetch(
+        "https://cop3530-final-project-twitter-traverse.onrender.com/api/health"
+      );
+      if (response.ok) {
         console.log("Server is Warm!");
-      }
-      else{
+      } else {
         console.log("Server Response but Error");
       }
-    } 
-    catch (error){
-      console.log ("Error", error);
+    } catch (error) {
+      console.log("Error", error);
     }
   };
 
@@ -213,6 +213,16 @@ export default function Home() {
         {/* Error Handling */}
         {!isLoading && error && (
           <p className="text-center text-red-500 text-lg pt-4">Error: {error}</p>
+        )}
+
+        {/* Loading */}
+        {isLoading && (
+          <section className="container mx-auto flex flex-col items-center justify-center p-4 gap-4">
+            <LoaderCircle className="animate-spin" size={45}></LoaderCircle>
+            <p className="text-sm text-gray-500 text-center">
+              First request may take 20-40 seconds while the server wakes up
+            </p>
+          </section>
         )}
 
         {/* Main Results */}
