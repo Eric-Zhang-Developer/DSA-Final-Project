@@ -23,6 +23,12 @@ except Exception as e:
     print(f"Error loading graph: {e}")
     graph = None
 
+# Health Check 
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "healthy"}), 200
+
+
 @app.route('/api/compare', methods=['POST'])
 def compare():
     if request.method == 'POST':
