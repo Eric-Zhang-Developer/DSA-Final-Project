@@ -2,7 +2,7 @@
 // Being lazy with eslint here...
 
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   interface ConnectionPair {
@@ -66,10 +66,32 @@ export default function Home() {
     setUser1(connectionPairs[randomIndex].user1);
     setUser2(connectionPairs[randomIndex].user2);
 
-    // Trigger pulse animation on the analyze button 
+    // Trigger pulse animation on the analyze button
     setShouldPulse(true);
-    setTimeout(() => setShouldPulse(false), 2000); 
+    setTimeout(() => setShouldPulse(false), 2000);
   }
+
+
+  // Server will start up from cold when page is initially loaded 
+  useEffect(() => {
+    warmUpServer();
+  }, []);
+
+  const warmUpServer = async () => {
+    console.log("Warming up Render Server!!");
+    try{
+      const response = await fetch("https://cop3530-final-project-twitter-traverse.onrender.com/api/health");
+      if (response.ok){
+        console.log("Server is Warm!");
+      }
+      else{
+        console.log("Server Response but Error");
+      }
+    } 
+    catch (error){
+      console.log ("Error", error);
+    }
+  };
 
   // Handles comparison
   // The big meaty logic is here
@@ -84,13 +106,16 @@ export default function Home() {
     try {
       // call backend
       // http://127.0.0.1:5001/api/compare
-      // call production 
+      // call production
       // https://cop3530-final-project-twitter-traverse.onrender.com/api/compare
-      const response = await fetch("https://cop3530-final-project-twitter-traverse.onrender.com/api/compare", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ start: user1, end: user2 }),
-      });
+      const response = await fetch(
+        "https://cop3530-final-project-twitter-traverse.onrender.com/api/compare",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ start: user1, end: user2 }),
+        }
+      );
 
       // error handling
       if (!response.ok) {
@@ -166,10 +191,10 @@ export default function Home() {
 
       {/* Compare */}
       <button
-          id="analyze-btn"
-          onClick={handleCompare}
-          disabled={isLoading || !user1 || !user2}
-          className={`
+        id="analyze-btn"
+        onClick={handleCompare}
+        disabled={isLoading || !user1 || !user2}
+        className={`
             transform bg-slate-700 text-white text-md font-medium
             py-2 px-6 rounded shadow-md border border-slate-600
             transition duration-200
@@ -177,11 +202,11 @@ export default function Home() {
             hover:cursor-pointer
             disabled:opacity-40
             disabled:cursor-not-allowed
-            ${shouldPulse && user1 && user2 ? 'animate-pulse ring-2 ring-emerald-400' : ''}
+            ${shouldPulse && user1 && user2 ? "animate-pulse ring-2 ring-emerald-400" : ""}
           `}
-        >
-          {isLoading ? "Analyzing..." : "Analyze Connection →"}
-        </button>
+      >
+        {isLoading ? "Analyzing..." : "Analyze Connection →"}
+      </button>
 
       {/* --- Display Area --- */}
       <div className="w-full min-h-[250px]">
