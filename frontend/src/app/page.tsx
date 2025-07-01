@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// Being lazy with eslint here...
-
 "use client";
 import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -9,6 +6,20 @@ export default function Home() {
   interface ConnectionPair {
     user1: string;
     user2: string;
+  }
+
+  interface JSONPayload {
+    dijkstra : ExpectedResult;
+    bfs : ExpectedResult;
+  }
+
+  interface ExpectedResult {
+    start: string;
+    end: string;
+    runtime_seconds: number;
+    nodes_expanded: number;
+    cost: number;
+    path: string[]
   }
 
   const connectionPairs: ConnectionPair[] = [
@@ -50,7 +61,7 @@ export default function Home() {
   const [user2, setUser2] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [shouldPulse, setShouldPulse] = useState(false);
-  const [results, setResults] = useState<any>(null);
+  const [results, setResults] = useState<JSONPayload | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
 
   // Handler functions for reading input
@@ -100,7 +111,7 @@ export default function Home() {
     console.log("Comparing!");
     // Resets comparison
     setIsLoading(true);
-    setResults(null);
+    setResults(undefined);
     setError(null);
 
     try {
@@ -126,10 +137,10 @@ export default function Home() {
       const data = await response.json();
       setResults(data);
       console.log(results);
-    } catch (err: any) {
+    } catch (error) {
       // Store error message, wipe results
-      setError(err.message || "Failed to fetch");
-      setResults(null);
+      setError("Failed to fetch");
+      setResults(undefined);
       console.log(error);
     } finally {
       setIsLoading(false);
